@@ -1,17 +1,43 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        if (args.length < 3) {
+            System.out.println("Podaj co najmniej trzy liczby do wykonania operacji arytmetycznych.");
+            return;
+        }
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        try {
+            double liczba1 = Double.parseDouble(args[0]);
+            double liczba2 = Double.parseDouble(args[1]);
+            String operator = args[2];
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+            double wynik = 0;
+
+            switch (operator) {
+                case "+":
+                    wynik = liczba1 + liczba2;
+                    break;
+                case "-":
+                    wynik = liczba1 - liczba2;
+                    break;
+                case "*":
+                    wynik = liczba1 * liczba2;
+                    break;
+                case "/":
+                    if (liczba2 != 0) {
+                        wynik = liczba1 / liczba2;
+                    } else {
+                        System.out.println("Nie można dzielić przez zero.");
+                        return;
+                    }
+                    break;
+                default:
+                    System.out.println("Niepoprawny operator. Dostępne operatory to +, -, *, /");
+                    return;
+            }
+
+            System.out.println("Wynik operacji: " + wynik);
+        } catch (NumberFormatException e) {
+            System.out.println("Podane argumenty nie są liczbami.");
         }
     }
 }
